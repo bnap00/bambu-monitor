@@ -57,7 +57,7 @@ static PrinterState fake[2];
 static bool enabled[2] = {true, true};
 PrinterState bambuGet(int i) { return fake[i]; }
 bool bambuEnabled(int i) { return enabled[i]; }
-String bambuName(int i) { return i == 0 ? "P1S" : "A1"; }
+String bambuName(int i) { return i == 0 ? "X2D" : "A1"; }
 void bambuCommand(int, PrinterCmd, int) {}
 const char *gstateName(GState s)
 {
@@ -86,7 +86,13 @@ static void setupFakes()
     a.remainingMin = 83;
     a.layer = 120;
     a.totalLayers = 300;
-    strcpy(a.job, "Benchy_0.2mm_PLA_P1S_1h50m");
+    strcpy(a.job, "Benchy_0.2mm_PLA_X2D_1h50m");
+    a.nozzleCount = 2;
+    a.activeNozzle = 1;
+    a.nozzleL = 219.6;
+    a.nozzleLTarget = 220;
+    a.nozzleR = 38;
+    a.nozzleRTarget = 0;
     a.nozzle = 219.6;
     a.nozzleTarget = 220;
     a.bed = 54;
@@ -96,8 +102,14 @@ static void setupFakes()
     a.chamberFan = 20;
     a.speedLevel = 2;
     a.wifiDbm = -48;
-    a.amsCount = 1;
+    a.amsCount = 4;
     a.ams[0].present = true;
+    a.ams[0].hwId = 0;
+    a.ams[3].present = true; // AMS HT
+    a.ams[3].hwId = 128;
+    a.ams[3].trayCount = 1;
+    a.ams[3].humidityPct = 14;
+    tray(a.ams[3].trays[0], "PA-CF", 0x2B2B2BFF, 90);
     a.ams[0].humidityLevel = 4;
     a.ams[0].humidityPct = 21;
     a.ams[0].tempC = 27.5;
@@ -192,7 +204,7 @@ int main()
     lv_disp_drv_register(&dd);
 
     uiInit();
-    const char *names[] = {"01_overview", "02_p1s_status", "03_p1s_temps", "04_p1s_ams", "05_p1s_health",
+    const char *names[] = {"01_overview", "02_x2d_status", "03_x2d_temps", "04_x2d_ams", "05_x2d_health",
                            "06_a1_status", "07_a1_temps", "08_a1_ams", "09_a1_health", "10_system"};
     for (int i = 0; i < 10; i++)
     {
@@ -204,15 +216,15 @@ int main()
         shot(names[i]);
     }
 
-    uiOnKnob(2); // wrap to P1S status
+    uiOnKnob(2); // wrap to X2D status
     run(400);
     uiOnKnobEvent(KnobEvent::Click); // press the screen: menu
     shot("11_menu_printer");
     uiOnKnobEvent(KnobEvent::DoubleClick);
 
-    uiOnKnob(2); // P1S filament for the single-AMS layout
-    shot("11b_p1s_ams_single");
-    uiShowAlert(0, AlertKind::Finished, "P1S finished", "Benchy_0.2mm_PLA_P1S_1h50m");
+    uiOnKnob(2); // X2D filament: AMS + AMS HT
+    shot("11b_x2d_ams");
+    uiShowAlert(0, AlertKind::Finished, "X2D finished", "Benchy_0.2mm_PLA_X2D_1h50m");
     shot("12_alert_finished");
     uiDismissAlert();
     uiShowAlert(1, AlertKind::Error, "A1 needs attention", "HMS 0300_0100_0001_0007");

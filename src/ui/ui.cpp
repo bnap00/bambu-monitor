@@ -760,7 +760,7 @@ static void refreshAms(int printer, AmsW *w)
         if (show)
         {
             String info = unit.hwId >= 128 ? String("AMS HT ") + String(unit.hwId - 127)
-                                           : "AMS " + String(unit.hwId + 1);
+                                           : "AMS " + String((unit.hwId >= 0 ? unit.hwId : slot) + 1);
             if (unit.humidityPct >= 0)
                 info += "  " + String(unit.humidityPct) + "% RH";
             else if (unit.humidityLevel >= 0)
