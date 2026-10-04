@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bambu Monitor · web flasher</title>
+  <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #0b0b0c; color: #e8e8e8; max-width: 640px; margin: 40px auto; padding: 0 16px; line-height: 1.5 }
+    h1 { font-size: 1.6em } a { color: #3ddc84 } code { background: #16161a; padding: 2px 5px; border-radius: 4px }
+    esp-web-install-button button[slot=activate] { padding: 12px 22px; border: 0; border-radius: 10px; background: #3ddc84; color: #000; font-weight: 600; font-size: 1em; cursor: pointer }
+    .note { color: #999; font-size: .9em }
+  </style>
+</head>
+<body>
+  <h1>Bambu Monitor</h1>
+  <p>Firmware for the <b>LilyGO T-Encoder-Pro</b> that shows Bambu Lab printers over LAN MQTT.</p>
+  <ol>
+    <li>Connect the T-Encoder-Pro with a USB-C <i>data</i> cable.</li>
+    <li>Click install, pick the <code>USB JTAG/serial debug unit</code> port.</li>
+    <li>After it reboots, join the <code>BambuMonitor-XXXX</code> Wi-Fi shown on the screen and enter your Wi-Fi and printer details.</li>
+  </ol>
+  <esp-web-install-button manifest="manifest.json">
+    <button slot="activate">Install</button>
+    <span slot="unsupported">Your browser can't flash devices. Use Chrome or Edge on desktop.</span>
+    <span slot="not-allowed">Flashing needs HTTPS.</span>
+  </esp-web-install-button>
+  <p class="note">If the port doesn't appear: hold the knob while plugging the cable in (boot mode), then try again.
+    Later updates can be installed over Wi-Fi from the device's web page.</p>
+  <p class="note">Not affiliated with Bambu Lab or LilyGO.</p>
+</body>
+</html>

@@ -1,0 +1,10 @@
+.pio/
+.vscode/
+dist/
+site/
+include/config_local.h
+test/sim/obj/
+test/sim/out/
+test/sim/sim
+test/sim/stress
+test/parse/test_parse
