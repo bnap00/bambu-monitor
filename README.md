@@ -58,6 +58,13 @@ pip install platformio
 pio run -e t-encoder-pro -t upload
 ```
 
+Install the gitleaks pre-commit hook before your first commit. It helps catch Wi-Fi passwords
+and access codes before they are committed locally:
+
+```bash
+pip install pre-commit && pre-commit install
+```
+
 I built most of the UI without touching the device. `test/sim` renders the real screens on a
 PC, and a stress test spins the knob 20,000 times. That's how a reboot-on-fast-spin bug in LVGL
 got caught. See [CONTRIBUTING.md](CONTRIBUTING.md).
