@@ -4,5 +4,6 @@ useDefault = true
 
 [[allowlists]]
 description = "HTML input attributes in the settings portal (e.g. maxlength=16), not secrets"
+condition = "AND"
 paths = ['''^src/net/portal\.cpp$''']
 regexes = ['''^maxlength=\d+$''']

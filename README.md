@@ -58,8 +58,8 @@ pip install platformio
 pio run -e t-encoder-pro -t upload
 ```
 
-Before your first commit, turn on the gitleaks pre-commit hook so Wi-Fi passwords and access
-codes can't slip into git:
+Install the gitleaks pre-commit hook before your first commit. It helps catch Wi-Fi passwords
+and access codes before they are committed locally:
 
 ```bash
 pip install pre-commit && pre-commit install
